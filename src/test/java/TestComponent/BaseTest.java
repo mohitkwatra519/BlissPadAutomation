@@ -8,10 +8,12 @@ import java.time.Duration;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterMethod;
 
@@ -36,6 +38,10 @@ public class BaseTest {
 			}
 			driver = new ChromeDriver(options);
 			driver.manage().window().setSize(new Dimension(1440, 900));
+		}
+		else if(browserName.equalsIgnoreCase("edge")) {
+			WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
 		}
 		else if(browserName.equalsIgnoreCase("firefox")) {
 			
