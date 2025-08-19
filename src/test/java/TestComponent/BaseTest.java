@@ -28,14 +28,14 @@ public class BaseTest {
 		prop.load(fis);
 		
 		String browserName = prop.getProperty("browser");
-		if(browserName.equalsIgnoreCase("chrome")) {
+		if(browserName.contains("chrome")) {
+			ChromeOptions options= new ChromeOptions();
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
-			
-		}
-		else if(browserName.equalsIgnoreCase("edge")) {
-			WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
+			if(browserName.contains("headless")) {
+			options.addArguments("headless");
+			}
+			driver = new ChromeDriver(options);
+			driver.manage().window().setSize(new Dimension(1440, 900));
 		}
 		else if(browserName.equalsIgnoreCase("firefox")) {
 			
